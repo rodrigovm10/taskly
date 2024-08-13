@@ -1,4 +1,4 @@
-import { SocialButton } from '@/components/login/social-button'
+import { SocialButton } from '@/components/auth/social-button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function LoginPage() {

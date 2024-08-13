@@ -1,6 +1,8 @@
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import { buttonVariants } from '../ui/button'
+import { buttonVariants } from '@/components/ui/button'
+import { ThemeToggle } from '@/components/theme/theme-toggle'
+import { ArrowRight } from 'lucide-react'
 
 export function Header() {
   return (
@@ -14,12 +16,16 @@ export function Header() {
             Taskly
           </Link>
         </section>
-        <section>
+        <section className='flex items-center gap-x-2'>
+          <ThemeToggle />
           <Link
             href='/dashboard'
-            className={buttonVariants({ variant: 'default' })}
+            className={cn(
+              buttonVariants({ variant: 'default', size: 'sm' }),
+              'flex items-center gap-'
+            )}
           >
-            Inicia sesión
+            Inicia sesión <ArrowRight className='size-4' />
           </Link>
         </section>
       </nav>

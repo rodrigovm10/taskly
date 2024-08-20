@@ -3,7 +3,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 
 import { db } from '@/server/db/db'
 import authConfig from '@/auth.config'
-import { getUserById } from '@/server/data/users'
+import { getUserById } from './server/data/user'
 
 export const {
   handlers: { GET, POST },
@@ -25,9 +25,6 @@ export const {
         session.user.id = token.sub
       }
 
-      if (session.user) {
-        session.user.limitLinks = token.limitLinks as number
-      }
       return session
     },
     async jwt({ token }) {
@@ -36,8 +33,6 @@ export const {
       const user = await getUserById({ id: token.sub })
 
       if (!user) return token
-
-      token.limitLinks = user.limitLinks
 
       return token
     }

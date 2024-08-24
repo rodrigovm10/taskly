@@ -1,8 +1,14 @@
 'use server'
 
 import { auth } from '@/auth'
-import { createTaskSchema, validateCreateTask } from '@/schemas/tasks'
+import {
+  createTaskSchema,
+  editTaskSchema,
+  validateCreateTask,
+  validateEditTask
+} from '@/schemas/tasks'
 import { db } from '@/server/db/db'
+import { Tasks } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
@@ -52,4 +58,35 @@ export const deleteTask = async (id: string) => {
   revalidatePath('/dashboard')
 
   if (taskDeleted) return { success: 'La tarea fue eliminada' }
+}
+
+export const editTask = async (values: z.infer<typeof editTaskSchema>) => {
+  const currentUser = await auth()
+
+  if (!currentUser) {
+    return { error: 'No estas autenticado. Por favor incia sesión' }
+  }
+
+  const data = validateEditTask(values)
+
+  if (data.error) {
+    return { error: 'Los datos ingresados son incorrectos' }
+  }
+
+  const taskEdited = await db.tasks.update({
+    where: {
+      id: data.data.id
+    },
+    data: {
+      title: data.data.title,
+      description: data.data.description
+    }
+  })
+
+  console.log(taskEdited)
+
+  revalidatePath('/')
+  revalidatePath('/dashboard')
+
+  if (taskEdited) return { success: 'La tarea fue editada', taskEdited }
 }

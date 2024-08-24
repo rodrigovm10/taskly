@@ -1,8 +1,5 @@
 'use client'
 
-// import { generateRandomLink } from '@/lib/utils'
-// import { useCreateLink } from '@/hooks/useCreateLink'
-
 import {
   Form,
   FormControl,
@@ -56,8 +53,7 @@ export function CreateTask() {
 
       toast.success('Tarea creada', {
         description: `Nombre: ${taskTitle} \n Descripción: ${taskDescription}`,
-        duration: 10000,
-        closeButton: true
+        duration: 10000
       })
 
       form.reset()
@@ -125,12 +121,15 @@ export function CreateTask() {
               )}
             />
             <DialogFooter>
-              <DialogClose
-                className='w-full'
-                disabled={isLoading}
-                type='button'
-              >
-                Cancel
+              <DialogClose>
+                <Button
+                  className='w-full'
+                  disabled={isLoading}
+                  type='button'
+                  variant={'ghost'}
+                >
+                  Cancelar
+                </Button>
               </DialogClose>
               <Button type='submit'>
                 {isLoading && <Loader className='size-4 animate-spin mr-2' />}

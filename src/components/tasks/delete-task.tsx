@@ -59,11 +59,12 @@ export default function DeleteTask({ task }: { task: Tasks }) {
         <DialogFooter>
           <DialogClose>
             <Button
+              className='w-full'
               disabled={isLoading}
               variant={'ghost'}
               type='button'
             >
-              Cancel
+              Cancelar
             </Button>
           </DialogClose>
           <Button

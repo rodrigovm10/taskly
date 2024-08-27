@@ -16,7 +16,9 @@ export default function SubHeader() {
           key={link.id}
           href={link.path}
           className={cn(
-            pathname !== link.path ? 'text-gray-400 hover:text-white' : 'text-white',
+            pathname !== link.path
+              ? 'dark:text-gray-400 dark:hover:text-white'
+              : 'dark:text-white text-black',
             'transition-all'
           )}
         >

@@ -11,7 +11,7 @@ export async function Header() {
   const session = await auth()
 
   return (
-    <header>
+    <header className='border border-b-2 pb-2'>
       <nav className='flex w-full items-center justify-between container mt-4'>
         <section className='hover:opacity-100 opacity-80 transition-all'>
           <Link

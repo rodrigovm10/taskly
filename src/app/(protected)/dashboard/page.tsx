@@ -10,13 +10,6 @@ export default async function DashboardPage() {
   return (
     <main className='container space-y-4'>
       <section className='flex w-full mb-3 items-center space-x-2 justify-between mt-4'>
-        <div className='relative'>
-          <Search className='absolute left-2 top-1/2 -translate-y-1/2 size-4 text-muted-foreground' />
-          <Input
-            placeholder='Buscar tareas'
-            className='pl-8'
-          />
-        </div>
         <CreateTask />
       </section>
       <section className='w-full grid gap-3 lg:grid-cols-3'>

@@ -11,7 +11,6 @@ import {
   DialogHeader
 } from '@/components/ui/dialog'
 import { Loader, Trash } from 'lucide-react'
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Tasks } from '@prisma/client'
 

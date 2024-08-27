@@ -64,7 +64,7 @@ export const editTask = async (values: z.infer<typeof editTaskSchema>) => {
   const currentUser = await auth()
 
   if (!currentUser) {
-    return { error: 'No estas autenticado. Por favor incia sesión' }
+    return { error: 'No estas autenticado. Por favor incia sesión.' }
   }
 
   const data = validateEditTask(values)
@@ -79,7 +79,8 @@ export const editTask = async (values: z.infer<typeof editTaskSchema>) => {
     },
     data: {
       title: data.data.title,
-      description: data.data.description
+      description: data.data.description,
+      completed: data.data.completed
     }
   })
 

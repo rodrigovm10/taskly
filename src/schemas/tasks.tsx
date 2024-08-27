@@ -16,7 +16,6 @@ export const createTaskSchema = z.object({
 
 export const editTaskSchema = z.object({
   id: z.string(),
-
   title: z
     .string({
       invalid_type_error: 'El título de la tarea debe ser un texto'
@@ -24,7 +23,8 @@ export const editTaskSchema = z.object({
     .min(5, { message: 'El titulo de la tarea debe tener un mínimo de 5 caracteres.' }),
   description: z.string({
     invalid_type_error: 'La descripción de la tarea debe ser un texto'
-  })
+  }),
+  completed: z.boolean()
 })
 
 export const validateCreateTask = (values: Tasks) => {

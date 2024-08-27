@@ -17,13 +17,22 @@ import { toast } from 'sonner'
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import { useForm } from 'react-hook-form'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from '../ui/form'
 import { Input } from '../ui/input'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { editTaskSchema } from '@/schemas/tasks'
 import { z } from 'zod'
 import { editTask } from '@/server/actions/tasks'
+import { Checkbox } from '../ui/checkbox'
 
 export function EditTask({ task }: { task: Tasks }) {
   const form = useForm<z.infer<typeof editTaskSchema>>({
@@ -31,13 +40,15 @@ export function EditTask({ task }: { task: Tasks }) {
     defaultValues: {
       id: task.id,
       title: task.title,
-      description: task.description
+      description: task.description,
+      completed: task.completed
     }
   })
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = async (values: z.infer<typeof editTaskSchema>) => {
+    console.log(values)
     try {
       setIsLoading(true)
       const result = await editTask(values)
@@ -115,6 +126,30 @@ export function EditTask({ task }: { task: Tasks }) {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name='completed'
+                render={({ field }) => (
+                  <FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4'>
+                    <FormControl>
+                      <div className='flex gap-x-4'>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </div>
+                    </FormControl>
+                    <div className='space-y-1 leading-none'>
+                      <FormLabel>Completar Tarea</FormLabel>
+                      <FormDescription>
+                        Completa la tarea si es que ya quedó finalizada :).
+                      </FormDescription>
+                    </div>
+                    <FormMessage className='text-red-700' />
+                  </FormItem>
+                )}
+              />
+
               <DialogFooter>
                 <DialogClose>
                   <Button

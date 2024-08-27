@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme/theme-provider'
 import { Header, Footer } from '@/components/layout'
 import { Toaster } from 'sonner'
+import SubHeader from '@/components/header/sub-header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
+          <SubHeader />
           {children}
           <Toaster />
           <Footer />
